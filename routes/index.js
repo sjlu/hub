@@ -11,7 +11,7 @@ router.get('/', middlewares.auth.redirectToClientIfLoggedIn, function(req, res, 
     return res.redirect('/client');
   }
 
-  return res.render('index');
+  return res.redirect('login');
 });
 
 module.exports = router;
