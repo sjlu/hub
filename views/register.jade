@@ -1,0 +1,21 @@
+extends ./layout
+
+block body
+  div.auth
+    div.container
+      div.row
+        div.col-md-offset-4.col-md-4.box.text-center
+          include ./flash
+          form(method="POST")
+            div.auth-input.auth-separator
+              input.form-control(type="email", name="email", placeholder="Email", autocapitalize="off", autocorrect="off", value=email)
+            div.auth-input.auth-separator
+              input.form-control(type="text", name="username", placeholder="Username", autocapitalize="off", autocorrect="off", value=username)
+            div.auth-input.auth-separator
+              input.form-control(type="password", name="password", placeholder="Password")
+            div.auth-input
+              input.form-control(type="password", name="confirm_password", placeholder="Confirm Password")
+            div
+              div
+                button.btn.btn-lg.btn-primary(type="submit")
+                  | Register

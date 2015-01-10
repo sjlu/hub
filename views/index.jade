@@ -1,0 +1,24 @@
+extends layout
+
+block body
+  div.homepage
+    div.container
+      i.fa.fa-video-camera
+      h1.text-center
+        | director
+      div.actions
+        div.auth
+          div.row
+            div.col-md-offset-4.col-md-4.box.text-center
+              include ./flash
+              form(method="POST" action="/login")
+                div.auth-input.auth-separator
+                  input.form-control(type="text", name="username", placeholder="Username", autocapitalize="off", autocorrect="off" value=username)
+                div.auth-input
+                  input.form-control(type="password", name="password", placeholder="Password")
+                div
+                  div
+                    button.btn.btn-lg.btn-primary(type="submit")
+                      | Login
+                    a.btn.btn-link.hidden(href="/register")
+                      | Register
