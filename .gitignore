@@ -3,3 +3,6 @@ node_modules
 log
 *.pid
 .env
+
+default_key.pem
+default_key.pub.pem
