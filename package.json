@@ -55,6 +55,7 @@
     "qued": "0.0.10",
     "redis": "^0.12.1",
     "request": "^2.51.0",
+    "spark-protocol": "^0.1.5",
     "static-favicon": "~1.0.0",
     "uid": "0.0.2",
     "validator": "^3.24.0"
