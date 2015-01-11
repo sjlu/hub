@@ -3,6 +3,9 @@ var router = express.Router();
 var models = require('../../lib/models');
 var async = require('async');
 var deviceKeys = require('../../lib/device_keys');
+var middlewares = require('../../lib/middlewares');
+
+router.use(middlewares.auth.requiresAdmin);
 
 router.post('/:id', function(req, res, next) {
   var deviceId = req.body.deviceID;
