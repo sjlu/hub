@@ -1,31 +1,11 @@
 ## hub
 
-all the devices communicate here
+the hub is the intermediary between the spark cloud and our frontend clients
 
-### instructions
+### info
 
-1. Install the Spark CLI.
+We used to use the [local cloud](docs/local_cloud.md) but decided against it because maintaining our own device sockets seems like a pain in the ass. It would also require us to completely reverse engineer the [spark-protocol](https://github.com/spark/spark-protocol).
 
-        npm install -g spark-cli
+Instead, we'll use the hosted spark cloud since it is included in each core. We will communicate knowing each core's hash ID and who it is associated to.
 
-2. Add the following lines to `~/.spark/spark.config.json`
-
-        {
-          "apiUrl": "http://hub.atomicdevices.co/spark"
-        }
-
-3. Create an [account](http://hub.atomicdevices.co/register)
-
-4. Get your auth credentials.
-
-        spark-cli setup
-
-5. Put the device into DFU mode by holding the `MODE` button and pressing the `RESET` button and waiting until the LED blinks yellow.
-
-6. You will need to obtain the server's public key in order to flash onto the device.
-
-        spark keys server default_key.pub.pem hub.atomicdevices.co
-
-7. Obtain the key and upload it to the server.
-
-        spark keys doctor 53ff68066667574816370967
+If the core is `flashing yellow`, you'll need to regenerate the device keys and tell the spark cloud about it. There's a [forum post](https://community.spark.io/t/troubleshooting-my-core-is-flashing-yellow-red-lights-after-it-connects-to-wifi/627/2) on how to do it.
