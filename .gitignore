@@ -6,3 +6,4 @@ log
 
 *.pem
 *.der
+device_keys/
