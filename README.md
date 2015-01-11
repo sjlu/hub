@@ -25,7 +25,7 @@ If the core is `flashing yellow`, you'll need to regenerate the device keys and 
 
 * Install global npm dependencies.
 
-        npm install -g bower grunt-cli node-dev
+        npm install -g node-dev
 
 * Clone the repository.
 
