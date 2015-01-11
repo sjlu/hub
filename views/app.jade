@@ -1,7 +1,7 @@
 extends ./layout
 
 block body
-  div.container(ng-app="client")
+  div.container(ng-app="#{name}")
     div.row
       div.col-md-offset-2.col-md-8
         div.topbar.clearfix(topbar)
@@ -15,6 +15,6 @@ block scripts
   script(src="/bower_components/angular-moment/angular-moment.min.js")
   script(src="/bower_components/lodash/dist/lodash.min.js")
   script
-    | window.client = angular.module('client', ['ngRoute', 'templates', 'ui.bootstrap', 'angularMoment']);
-  script(src="/build/client/templates.js")
-  script(src="/build/client/app.js")
+    | window.#{name} = angular.module('#{name}', ['ngRoute', 'templates', 'ui.bootstrap', 'angularMoment']);
+  script(src="/build/#{name}/templates.js")
+  script(src="/build/#{name}/app.js")
