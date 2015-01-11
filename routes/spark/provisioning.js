@@ -22,7 +22,7 @@ router.post('/:id', function(req, res, next) {
     }
   ], function(err) {
     if (err) return next(err);
-    return cb();
+    res.send();
   });
 
 });
