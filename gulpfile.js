@@ -74,7 +74,6 @@ gulp.task('html', function() {
 
 gulp.task('js', function() {
   _.each(apps, function(app) {
-
     gulp
       .src('./public/'+app+'/**/*.js')
       .pipe(plumber())
@@ -102,14 +101,18 @@ gulp.task('watch', function() {
     }
   }
 
-  _.each([
-    './public/client/**/*.js',
-    './public/client/**/*.jade',
-    './public/client/**/*.styl',
+  var paths = [
     './public/styles/**/*.styl',
     './public/styles/bootstrap.less',
     './views/*'
-  ], function(path) {
+  ];
+  _.each(apps, function(app) {
+    paths.push('./public/'+app+'/**/*.js');
+    paths.push('./public/'+app+'/**/*.jade');
+    paths.push('./public/'+app+'/**/*.styl');
+  });
+
+  _.each(paths, function(path) {
     watch(path, changed);
   });
 });

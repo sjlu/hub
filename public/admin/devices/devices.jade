@@ -1,13 +1,19 @@
 div.devices
+  button.btn.btn-default(ng-click="claimDevice()")
+    | Add New Spark
   table.table.table-bordered
     thead
       th
         | id
       th
         | device id
+      th
+        | owner
     tbody
       tr(ng-repeat="device in devices")
         td
           | {{device._id}}
         td
           | {{device.device_id}}
+        td
+          | {{device._uid.name}}

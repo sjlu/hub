@@ -8,7 +8,7 @@ router.use(middlewares.auth.requiresAdmin);
 
 router.get('/', function(req, res, next) {
 
-  var devices = models.Device.find({}, function(err, devices) {
+  var devices = models.Device.find().populate('_uid').exec(function(err, devices) {
     if (err) return next(err)
       res.json(devices);
   });
