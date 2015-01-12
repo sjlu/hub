@@ -1,1 +1,13 @@
 div.devices
+  table.table.table-bordered
+    thead
+      th
+        | id
+      th
+        | device id
+    tbody
+      tr(ng-repeat="device in devices")
+        td
+          | {{device._id}}
+        td
+          | {{device.device_id}}

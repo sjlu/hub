@@ -13,7 +13,7 @@ router.post('/token', function(req, res, next) {
         "error": "Unknown username and password combination."
       });
     }
-    auth.createToken(uid, function(err, token) {
+    auth.createToken(uid, 'spark', function(err, token) {
       if (err) return next(err);
       res.json({
         "access_token": token
