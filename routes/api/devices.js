@@ -6,6 +6,15 @@ var models = require('../../lib/models');
 
 router.use(middlewares.auth.requiresAdmin);
 
+router.get('/', function(req, res, next) {
+
+  var devices = models.Device.find({}, function(err, devices) {
+    if (err) return next(err)
+      res.json(devices);
+  });
+
+});
+
 router.post('/', function(req, res, next) {
 
   var deviceId = req.body.device_id;
