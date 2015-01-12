@@ -1,0 +1,3 @@
+[submodule "firmware/alarm"]
+	path = firmware/alarm
+	url = git@github.com:atomicdevices/alarm.git
