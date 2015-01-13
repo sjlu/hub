@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var worker = require('../worker');
+var plugs = require('../plugs');
 
 process.send('online');
 process.on('message', function(message) {
