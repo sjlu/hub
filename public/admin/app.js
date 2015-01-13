@@ -4,6 +4,7 @@ admin.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
 
   var routes = {
     '/devices': 'devices',
+    '/devices/:device_id': 'viewDevice',
     '/firmware': 'firmware'
   };
 

@@ -1,0 +1,31 @@
+div.devices
+  h4.text-uppercase
+    | id
+  p
+    | {{device._id}}
+
+  h4.text-uppercase
+    | spark id
+  p
+    | {{device.device_id}}
+
+  h4.text-uppercase
+    | firmware
+  p
+    span(ng-show="device.firmware_name")
+      | {{device.firmware_name}} {{device.firmware_version}}
+    span(ng-hide="device.firmware_name")
+      | none
+    | &nbsp;
+    span.label.label-success(ng-show="device.firmware_current")
+      | up to date
+    span.label.label-danger(ng-show="!f.firmware_current")
+      | out of date
+
+  h4.text-uppercase
+    | connected
+  p(ng-show="spark")
+    span.label.label-success(ng-show="spark.connected")
+      | yes
+    span.label.label-danger(ng-show="!spark.connected")
+      | no
