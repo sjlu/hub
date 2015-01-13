@@ -5,7 +5,7 @@ var plugs = require('../../plugs');
 var winston = require('../../lib/winston');
 
 router.post('/', function(req, res, next) {
-  var evt = req.body.name;
+  var evt = req.body.event;
   var coreId = req.body.coreid;
   var data = req.body.data;
   var obj = {
