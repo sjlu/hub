@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 var plugs = require('../plugs');
+var winston = require('../lib/winston');
 
 process.send('online');
+winston.info('listener online');
 process.on('message', function(message) {
  if (message === 'shutdown') {
+  winston.info('listener shutting down');
    process.exit(0);
  }
 });
