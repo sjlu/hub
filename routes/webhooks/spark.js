@@ -14,6 +14,8 @@ router.post('/', function(req, res, next) {
     data: data
   }
 
+  evt = evt.replace("/"+coreId, "");
+
   if (!plugs.map[evt]) {
     winston.warn('event was received but unhandled', obj);
     return res.send();
