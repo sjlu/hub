@@ -5,16 +5,22 @@
   "scripts": {
     "web": "./node_modules/node-dev/bin/node-dev ./bin/web",
     "worker": "./node_modules/node-dev/bin/node-dev ./bin/worker",
+    "listener": "./node_modules/node-dev/bin/node-dev ./bin/listener",
     "build": "./node_modules/gulp/bin/gulp.js",
     "postinstall": "./node_modules/bower/bin/bower install",
+    "deploy": "npm install; npm run build; npm run \"deploy web\"; npm run \"deploy worker\"; npm run \"deploy listener\";",
     "deploy web": "./deploy.sh web",
     "deploy worker": "./deploy.sh worker",
+    "deploy listener": "./deploy.sh listener",
     "restart web": "./node_modules/naught/lib/main.js deploy ./naught-web.ipc",
     "restart worker": "./node_modules/naught/lib/main.js deploy ./naught-worker.ipc",
+    "restart listener": "./node_modules/naught/lib/main.js deploy ./naught-listener.ipc",
     "start web": "./node_modules/naught/lib/main.js start --pid-file naught-web.pid --ipc-file naught-web.ipc --log ./log/naught-web.log --stdout ./log/stdout-web.log --stderr ./log/stderr-web.log bin/web",
     "start worker": "./node_modules/naught/lib/main.js start --pid-file naught-worker.pid --ipc-file naught-worker.ipc --log ./log/naught-worker.log --stdout ./log/stdout-worker.log --stderr ./log/stderr-worker.log bin/worker",
+    "start listener": "./node_modules/naught/lib/main.js start --pid-file naught-listener.pid --ipc-file naught-listener.ipc --log ./log/naught-listener.log --stdout ./log/stdout-listener.log --stderr ./log/stderr-listener.log bin/listener",
     "stop web": "./node_modules/naught/lib/main.js stop ./naught-web.ipc",
     "stop worker": "./node_modules/naught/lib/main.js stop ./naught-worker.ipc",
+    "stop listener": "./node_modules/naught/lib/main.js stop ./naught-listener.ipc",
     "gulp": "./node_modules/gulp/bin/gulp.js; ./node_modules/gulp/bin/gulp.js watch"
   },
   "dependencies": {
