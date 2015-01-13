@@ -4,8 +4,8 @@ var spark = require('../../lib/spark');
 var plugs = require('../../plugs');
 var winston = require('../../lib/winston');
 
-router.post('/', function(req, res, next) {
-  var evt = req.body.event;
+router.post(/^\/(,+)/, function(req, res, next) {
+  var evt = req.params[0];
   var coreId = req.body.coreid;
   var data = req.body.data;
   var obj = {

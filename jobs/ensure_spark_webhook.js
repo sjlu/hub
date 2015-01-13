@@ -9,13 +9,13 @@ var async = require('async');
 
 var webhookUrl = url.resolve(config.BASE_URL, '/webhooks/spark');
 
-function createWebhook(event, cb) {
+function createWebhook(event, url, cb) {
   request({
     uri: 'https://api.spark.io/v1/webhooks',
     method: 'POST',
     form: {
       event: event,
-      url: webhookUrl,
+      url: url,
       access_token: config.SPARK_CLOUD_KEY,
       mydevices: true
     }
@@ -33,8 +33,10 @@ module.exports = function(job, done) {
     async.each(_.keys(plugs.map), function(evt, cb) {
       if (err) return cb(err);
 
+      var eventHookUrl = webhookUrl+"/"+evt;
+
       for (var i = 0; i < hooks.length; i++) {
-        if (hooks[i].url === webhookUrl && hooks[i].event === evt) {
+        if (hooks[i].url === eventHookUrl && hooks[i].event === evt) {
           winston.info('hook already installed, skipping');
           return cb();
         }
@@ -45,10 +47,10 @@ module.exports = function(job, done) {
       // workaround until this pull request
       // is merged in and released
       // https://github.com/spark/sparkjs/pull/43
-      // spark.createWebhook(null, webhookUrl, 'mine', function(err) {
+      // spark.createWebhook(null, eventHookUrl, 'mine', function(err) {
       if (err) return cb(err);
-      createWebhook(evt, plugs[evt]);
-      winston.info('webhook installed', {url: webhookUrl, evt: evt});
+      createWebhook(evt, eventHookUrl, plugs[evt]);
+      winston.info('webhook installed', {url: eventHookUrl, evt: evt});
       return cb();
     }, done);
   })
