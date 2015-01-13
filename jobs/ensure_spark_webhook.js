@@ -33,7 +33,7 @@ module.exports = function(job, done) {
     async.each(_.keys(plugs.map), function(evt, cb) {
       if (err) return cb(err);
 
-      var eventHookUrl = webhookUrl+"/"+evt;
+      var eventHookUrl = webhookUrl+"/?event="+evt;
 
       for (var i = 0; i < hooks.length; i++) {
         if (hooks[i].url === eventHookUrl && hooks[i].event === evt) {
