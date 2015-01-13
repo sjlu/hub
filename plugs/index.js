@@ -38,5 +38,6 @@ spark.getEventStream(null, 'mine', function(data) {
     return;
   }
 
+  winston.info('received event', data);
   evtMap[data.name](data.coreid, data.data);
 });
