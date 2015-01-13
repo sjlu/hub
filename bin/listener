@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var plugs = require('../plugs');
+var plugs = require('../plugs').start();
 var winston = require('../lib/winston');
 
 process.send('online');

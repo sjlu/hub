@@ -32,12 +32,16 @@ var readDir = function(dir) {
 
 readDir();
 
-spark.getEventStream(null, 'mine', function(data) {
-  if (!evtMap[data.name]) {
-    winston.warn('no such handler', data.name)
-    return;
-  }
+module.exports.start = function() {
+  spark.getEventStream(null, 'mine', function(data) {
+    if (!evtMap[data.name]) {
+      winston.warn('no such handler', data.name)
+      return;
+    }
 
-  winston.info('received event', data);
-  evtMap[data.name](data.coreid, data.data);
-});
+    winston.info('received event', data);
+    evtMap[data.name](data.coreid, data.data, function(){});
+  });
+}
+
+module.exports.map = evtMap;

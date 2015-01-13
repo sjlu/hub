@@ -1,30 +1,56 @@
 var spark = require('../lib/spark');
 var winston = require('../lib/winston');
 var config = require('../lib/config');
-var path = require('path');
+var url = require('url');
 var _ = require('lodash');
+var request = require('request');
+var plugs = require('../plugs');
+var async = require('async');
 
+var webhookUrl = url.resolve(config.BASE_URL, '/webhooks/spark');
+
+function createWebhook(event, cb) {
+  request({
+    uri: 'https://api.spark.io/v1/webhooks',
+    method: 'POST',
+    form: {
+      event: event,
+      url: webhookUrl,
+      access_token: config.SPARK_CLOUD_KEY,
+      mydevices: true
+    }
+  }, cb);
+}
 
 module.exports = function(job, done) {
-
-  var url = path.join(config.BASE_URL, '/webhooks/spark');
 
   winston.info('ensuring that the spark webhook is installed');
   spark.listWebhooks(function(err, hooks) {
     if (err) return done(err);
+
     winston.info('hooks that are already installed', hooks);
 
-    if (_.contains(hooks, url)) {
-      winston.info('hook already installed, skipping');
-      return done();
-    } else {
+    async.each(_.keys(plugs.map), function(evt, cb) {
+      if (err) return cb(err);
+
+      for (var i = 0; i < hooks.length; i++) {
+        if (hooks[i].url === webhookUrl && hooks[i].event === evt) {
+          winston.info('hook already installed, skipping');
+          return cb();
+        }
+      }
+
       winston.info('hook not found, installing');
-      spark.createWebhook(null, url, 'mine', function(err) {
-        if (err) return done(err);
-        winston.info('webhook installed');
-        return done();
-      })
-    }
+
+      // workaround until this pull request
+      // is merged in and released
+      // https://github.com/spark/sparkjs/pull/43
+      // spark.createWebhook(null, webhookUrl, 'mine', function(err) {
+      if (err) return cb(err);
+      createWebhook(evt, plugs[evt]);
+      winston.info('webhook installed', {url: webhookUrl, evt: evt});
+      return cb();
+    }, done);
   })
 
 }
