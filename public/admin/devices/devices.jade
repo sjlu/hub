@@ -1,6 +1,6 @@
 div.devices
-  button.btn.btn-default(ng-click="claimDevice()")
-    | Add New Spark
+  button.btn.btn-primary(ng-click="claimDevice()")
+    | Add
   table.table.table-bordered
     thead
       th
@@ -8,12 +8,21 @@ div.devices
       th
         | device id
       th
+        | firmware
+      th
         | owner
     tbody
       tr(ng-repeat="device in devices")
         td
-          | {{device._id}}
+          small
+            | {{device._id}}
         td
-          | {{device.device_id}}
+          small
+            | {{device.device_id}}
+        td
+          span(ng-show="device.firmware_name")
+            | {{device.firmware_name}}@{{device.firmware_version}}
+          span.label.label-default(ng-show="!device.firmware_name")
+            | None
         td
           | {{device._uid.name}}

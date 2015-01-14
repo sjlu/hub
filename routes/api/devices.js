@@ -5,14 +5,39 @@ var middlewares = require('../../lib/middlewares');
 var models = require('../../lib/models');
 var _ = require('lodash');
 var async = require('async');
+var firmware = require('../../lib/firmware');
 
 router.use(middlewares.auth.requiresAdmin);
 
 router.get('/', function(req, res, next) {
+  async.parallel({
+    devices: function(cb) {
+      models.Device.find().populate('_uid').exec(cb);
+    },
+    firmware: function(cb) {
+      firmware.list(cb);
+    }
+  }, function(err, data) {
+    var devices = data.devices;
+    if (err) return next(err);
 
-  var devices = models.Device.find().populate('_uid').exec(function(err, devices) {
-    if (err) return next(err)
-      res.json(devices);
+    data.devices = _.map(devices, function(d) {
+      d = d.toJSON();
+
+      if (
+        devices.firmware_name
+        && data.firmware[devices.firmware_name]
+        && data.firmware[devices.firmware_name].version === devices.firmware_version
+      ) {
+        d.firmware_current = true;
+      } else {
+        d.firmware_current = false;
+      }
+
+      return d;
+    });
+
+    res.json(data.devices);
   });
 
 });

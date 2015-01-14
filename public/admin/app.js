@@ -3,9 +3,7 @@ admin.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
   $locationProvider.html5Mode(false);
 
   var routes = {
-    '/devices': 'devices',
-    '/devices/:device_id': 'viewDevice',
-    '/firmware': 'firmware'
+    '/devices': 'devices'
   };
 
   for (var route in routes) {

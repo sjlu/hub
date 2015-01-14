@@ -1,4 +1,5 @@
 admin.controller('devices', function($scope, $http, $modal) {
+
   $scope.devices;
   $scope.getDevices = function() {
     $http.get('/api/devices').success(function(data) {
@@ -13,7 +14,8 @@ admin.controller('devices', function($scope, $http, $modal) {
       controller: 'addDeviceModal'
     });
     modal.result.then(function() {
-      $scope.getServers();
+      $scope.getDevices();
     });
   }
+
 });
