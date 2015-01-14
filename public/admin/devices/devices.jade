@@ -22,8 +22,10 @@ div.devices
           small
             | {{device.spark_id}}
         td
-          span.label(ng-class="{'label-success':device.connected, 'label-danger':!device.connected}")
+          span.label.label-success(ng-show="device.connected")
             | {{device.connected}}
+          span.label.label-danger(ng-hide="device.connected")
+            | last seen {{device.last_seen | amCalendar}}
         td(ng-click="selectFirmware(device._id)")
           span.label(ng-show="device.firmware_name" ng-class="{'label-success':device.firmware_current, 'label-danger':!device.firmware_current}")
             | {{device.firmware_name}}
