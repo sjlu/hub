@@ -1,0 +1,16 @@
+div.modal-header
+  h4.modal-title
+    | Select Firmware
+div.modal-body
+  form(ng-submit="")
+    div.form-group
+      label
+        | Firmware
+      select.form-control(ng-model="selectedFirmware")
+        option(ng-repeat="f in firmware" value="{{f.name}}")
+          | {{f.name}}@{{f.version}}
+div.modal-footer
+  button.btn.btn-default(ng-click="close()")
+    | Cancel
+  button.btn.btn-primary(type="submit" ng-click="submit()")
+    | Save

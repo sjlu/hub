@@ -19,7 +19,7 @@ div.devices
         td
           small
             | {{device.device_id}}
-        td
+        td(ng-click="selectFirmware(device._id)")
           span(ng-show="device.firmware_name")
             | {{device.firmware_name}}@{{device.firmware_version}}
           span.label.label-default(ng-show="!device.firmware_name")

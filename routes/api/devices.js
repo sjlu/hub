@@ -92,4 +92,24 @@ router.get('/:device_id/spark', getDeviceFromParams, function(req, res, next) {
   });
 });
 
+router.post('/:device_id/firmware', getDeviceFromParams, function(req, res, next) {
+  if (!req.body.firmware) {
+    return res.json(400, {"error": "firmware input missing"})
+  }
+
+  firmware.list(function(err, list) {
+    if (!list[req.body.firmware]) {
+      return res.json(401, {"error": "firmware not found"})
+    }
+
+    req.device.firmware = req.body.firmware;
+    req.device.save(function(err, device) {
+      if (err) return next(err);
+      res.json(device);
+    })
+  })
+
+
+});
+
 module.exports = router;

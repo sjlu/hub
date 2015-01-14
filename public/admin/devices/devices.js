@@ -18,4 +18,19 @@ admin.controller('devices', function($scope, $http, $modal) {
     });
   }
 
+  $scope.selectFirmware = function(deviceId) {
+    var modal = $modal.open({
+      templateUrl: 'selectFirmwareModal.html',
+      controller: 'selectFirmwareModal',
+      device_id: deviceId
+    });
+    modal.result.then(function(firmware) {
+      $http.post('/api/devices/'+deviceId+'/firmware', {
+        firmware: firmware
+      }).success(function(data) {
+        $scope.getDevices();
+      });
+    });
+  }
+
 });

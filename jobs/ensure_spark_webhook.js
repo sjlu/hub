@@ -9,7 +9,7 @@ var async = require('async');
 
 var webhookUrl = url.resolve(config.BASE_URL, '/webhooks/spark');
 
-function createWebhook(event, url, cb) {
+var createWebhook = function(event, url, cb) {
   request({
     uri: 'https://api.spark.io/v1/webhooks',
     method: 'POST',
