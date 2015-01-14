@@ -37,6 +37,13 @@ module.exports = function(job, done) {
       device.getSparkDevice(function(err, sparkDevice) {
         if (err) return done(err);
 
+        if (!sparkDevice.connected) {
+          winston.warn("device went offline before we could update", {
+            core_id: coreId
+          });
+          return done();
+        }
+
         sparkDevice.flash([firmwareToFlashWith.file], function(err, data) {
           if (err) return done(err);
 
