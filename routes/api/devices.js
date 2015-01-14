@@ -105,9 +105,18 @@ router.post('/:device_id/firmware', getDeviceFromParams, function(req, res, next
 
     req.device.firmware_name = req.body.firmware;
     req.device.firmware_version = null;
-    req.device.save(function(err, device) {
+    async.parallel({
+      device: function(cb) {
+        req.device.save(cb);
+      },
+      update_job: function(cb) {
+        job.create('update_device_firmware', {
+          device_id: req.device._id
+        }).save(cb);
+      }
+    }, function(err, data) {
       if (err) return next(err);
-      res.json(device);
+      res.json(data.device);
     })
   })
 

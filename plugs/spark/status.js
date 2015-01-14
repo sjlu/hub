@@ -1,9 +1,9 @@
 var jobs = require('../../lib/jobs');
 
-module.exports = function(coreId, data, cb) {
+module.exports = function(id, data, cb) {
   if (data == 'online') {
     jobs.create('update_device_firmware', {
-      core_id: coreId
+      spark_id: id
     }).save(cb);
   }
 }

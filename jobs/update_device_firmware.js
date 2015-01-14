@@ -5,11 +5,11 @@ var spark = require('../lib/spark');
 
 module.exports = function(job, done) {
 
-  var coreId = job.data.core_id;
+  var findBy = {};
+  if (job.data.spark_id) findBy.spark_id = job.data.spark_id;
+  if (job.data.device_id) findBy._id = job.data.device_id;
 
-  models.Device.findOne({
-    spark_id: coreId
-  }).exec(function(err, device) {
+  models.Device.findOne(findBy).exec(function(err, device) {
     if (err) return done(err);
     if (!device) return done(new Error("device not found"))
     if (!device.firmware_name) {
