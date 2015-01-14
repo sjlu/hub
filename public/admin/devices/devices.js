@@ -13,8 +13,12 @@ admin.controller('devices', function($scope, $http, $modal) {
       templateUrl: 'addDeviceModal.html',
       controller: 'addDeviceModal'
     });
-    modal.result.then(function() {
-      $scope.getDevices();
+    modal.result.then(function(sparkId) {
+      $http.post('/api/devices', {
+        spark_id: sparkId
+      }).success(function(data) {
+        $scope.getDevices();
+      });
     });
   }
 

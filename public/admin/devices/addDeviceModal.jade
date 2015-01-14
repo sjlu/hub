@@ -5,8 +5,8 @@ div.modal-body
   form
     div.form-group
       label
-        | Device ID
-      input.form-control(type="text" ng-model="deviceId" placeholder="spark cloud device id" required="true")
+        | Spark Core/Photon ID
+      input.form-control(type="text" ng-model="sparkId" placeholder="spark cloud device id" required="true")
 div.modal-footer
-  button.btn.btn-primary(type="submit" ng-click="createServer()")
+  button.btn.btn-primary(type="submit" ng-click="create()")
     | Create

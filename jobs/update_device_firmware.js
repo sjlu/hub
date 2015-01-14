@@ -8,7 +8,7 @@ module.exports = function(job, done) {
   var coreId = job.data.core_id;
 
   models.Device.findOne({
-    device_id: coreId
+    spark_id: coreId
   }).exec(function(err, device) {
     if (err) return done(err);
     if (!device) return done(new Error("device not found"))
@@ -34,11 +34,15 @@ module.exports = function(job, done) {
         return done();
       }
 
-      spark.flash([firmwareToFlashWith.file], function(err, data) {
+      device.getSparkDevice(function(err, sparkDevice) {
         if (err) return done(err);
 
-        device.firmware_version = firmwareToFlashWith.version;
-        device.save(done);
+        sparkDevice.flash([firmwareToFlashWith.file], function(err, data) {
+          if (err) return done(err);
+
+          device.firmware_version = firmwareToFlashWith.version;
+          device.save(done);
+        });
       });
 
     });

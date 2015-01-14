@@ -18,10 +18,14 @@ div.devices
             | {{device._id}}
         td
           small
-            | {{device.device_id}}
+            | {{device.spark_id}}
         td(ng-click="selectFirmware(device._id)")
-          span(ng-show="device.firmware_name")
-            | {{device.firmware_name}}@{{device.firmware_version}}
+          span.label(ng-show="device.firmware_name" ng-class="{'label-success':device.firmware_current, 'label-danger':!device.firmware_current}")
+            | {{device.firmware_name}}
+            span(ng-show="device.firmware_version")
+              | @{{device.firmware_version}}
+            span(ng-hide="device.firmware_version")
+              | @none
           span.label.label-default(ng-show="!device.firmware_name")
             | None
         td

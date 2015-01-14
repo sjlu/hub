@@ -8,13 +8,13 @@ var middlewares = require('../../lib/middlewares');
 router.use(middlewares.auth.requiresAdmin);
 
 router.post('/:id', function(req, res, next) {
-  var deviceId = req.body.deviceID;
+  var sparkId = req.body.deviceID;
   var pubKey = req.body.publicKey;
 
   async.parallel([
     function(cb) {
       var device = new models.Device({
-        device_id: deviceId,
+        spark_id: sparkId,
         device_key: pubKey
       });
 

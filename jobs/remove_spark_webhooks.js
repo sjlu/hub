@@ -14,7 +14,7 @@ module.exports = function(job, done) {
     if (err) return done(err);
     async.each(hooks, function(hook, cb) {
 
-      if (hooks.url.indexOf(webhookUrl) === 0) {
+      if (hook.url.indexOf(webhookUrl) === 0) {
         spark.deleteWebhook(hook.id, cb);
       } else {
         cb();

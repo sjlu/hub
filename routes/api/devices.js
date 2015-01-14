@@ -25,9 +25,9 @@ router.get('/', function(req, res, next) {
       d = d.toJSON();
 
       if (
-        devices.firmware_name
-        && data.firmware[devices.firmware_name]
-        && data.firmware[devices.firmware_name].version === devices.firmware_version
+        d.firmware_name
+        && data.firmware[d.firmware_name]
+        && data.firmware[d.firmware_name].version == d.firmware_version
       ) {
         d.firmware_current = true;
       } else {
@@ -44,13 +44,13 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-  var deviceId = req.body.device_id;
+  var sparkId = req.body.spark_id;
 
   var device = models.Device({
-    device_id: deviceId
+    spark_id: sparkId
   });
 
-  spark.claimCore(deviceId, function(err, data) {
+  spark.claimCore(sparkId, function(err, data) {
     if (err) return next(err);
     device.save(function(err) {
       if (err) return next(err);
@@ -63,6 +63,7 @@ router.post('/', function(req, res, next) {
 var getDeviceFromParams = function(req, res, next) {
   models.Device.findById(req.params.device_id, function(err, device) {
     if (err) return next(err);
+    if (!device) return res.send(404);
     req.device = device;
     next();
   });
@@ -102,7 +103,8 @@ router.post('/:device_id/firmware', getDeviceFromParams, function(req, res, next
       return res.json(401, {"error": "firmware not found"})
     }
 
-    req.device.firmware = req.body.firmware;
+    req.device.firmware_name = req.body.firmware;
+    req.device.firmware_version = null;
     req.device.save(function(err, device) {
       if (err) return next(err);
       res.json(device);
