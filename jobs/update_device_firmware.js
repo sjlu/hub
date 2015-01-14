@@ -13,9 +13,7 @@ module.exports = function(job, done) {
     if (err) return done(err);
     if (!device) return done(new Error("device not found"))
     if (!device.firmware_name) {
-      winston.warn("device has no set firmware", {
-        core_id: coreId
-      });
+      winston.warn("device has no set firmware", findBy);
       return done();
     }
 
@@ -26,11 +24,7 @@ module.exports = function(job, done) {
       var firmwareToFlashWith = firmware[device.firmware_name];
 
       if (firmwareToFlashWith.version === device.firmware_version) {
-        winston.info("device is already up to date", {
-          core_id: coreId,
-          firmware_name: device.firmware_name,
-          firmware_version: device.firmware_version
-        });
+        winston.info("device is already up to date", findBy);
         return done();
       }
 
@@ -38,9 +32,7 @@ module.exports = function(job, done) {
         if (err) return done(err);
 
         if (!sparkDevice.connected) {
-          winston.warn("device went offline before we could update", {
-            core_id: coreId
-          });
+          winston.warn("device went offline before we could update", findBy);
           return done();
         }
 
