@@ -14,7 +14,7 @@ module.exports = function(id, data, cb) {
       }
     },
     function(cb) {
-      models.Device.find({
+      models.Device.findOne({
         spark_id: id
       }).exec(function(err, device) {
         if (err) return cb(err);
