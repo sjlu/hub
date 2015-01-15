@@ -123,4 +123,11 @@ router.post('/:device_id/firmware', getDeviceFromParams, function(req, res, next
 
 });
 
+router.get('/:device_id/variable/:variable_name', getDeviceFromParams, function(req, res, next) {
+  req.device.getSparkVariable(req.params.variable_name, function(err, data) {
+    if (err) return next(err);
+    res.json(data);
+  })
+});
+
 module.exports = router;
