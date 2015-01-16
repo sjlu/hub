@@ -11,8 +11,6 @@ module.exports = function(job, done) {
 
     async.each(_.values(list), function(f, cb) {
 
-      console.log(f);
-
       models.Device.find({
         firmware_name: f.name,
         firmware_version: {
