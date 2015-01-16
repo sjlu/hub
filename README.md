@@ -30,7 +30,7 @@ If the core is `flashing yellow`, you'll need to regenerate the device keys and 
 * Clone the repository.
 
         git clone git@github.com:atomicdevices/hub.git
-        cd bhub
+        cd hub
 
 * Install dependencies.
 
