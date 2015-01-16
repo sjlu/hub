@@ -130,4 +130,11 @@ router.get('/:device_id/variable/:variable_name', getDeviceFromParams, function(
   })
 });
 
+router.get('/:device_id/events', getDeviceFromParams, function(req, res, next) {
+  req.device.getEvents(function(err, events) {
+    if (err) return next(err);
+    res.json(events);
+  })
+});
+
 module.exports = router;
