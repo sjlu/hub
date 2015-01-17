@@ -1,11 +1,16 @@
 extends ./layout
 
 block body
-  div.container(ng-app="#{name}")
-    div.row
-      div.col-md-offset-2.col-md-8
-        div.topbar.clearfix(topbar)
-        div(ng-view)
+  div(ng-app="#{name}")
+    div.topbar.clearfix
+      div.container
+        div.row
+          div.col-md-offset-2.col-md-8
+            div(topbar)
+    div.container
+      div.row
+        div.col-md-offset-2.col-md-8
+          div(ng-view)
 
 block scripts
   script(src="/bower_components/angular/angular.min.js")
