@@ -17,7 +17,8 @@ div.devices
       tr(ng-repeat="device in devices")
         td
           small
-            | {{device._id}}
+            | {{device._id}}&nbsp;
+            i.fa.fa-key(ng-click="getClaimCode(device._id)")
         td
           small
             | {{device.spark_id}}

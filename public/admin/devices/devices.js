@@ -37,4 +37,16 @@ admin.controller('devices', function($scope, $http, $modal) {
     });
   }
 
+  $scope.getClaimCode = function(deviceId) {
+    var modal = $modal.open({
+      templateUrl: 'viewDeviceClaimCode.html',
+      controller: 'viewDeviceClaimCode',
+      resolve: {
+        deviceId: function() {
+          return deviceId;
+        }
+      }
+    });
+  }
+
 });

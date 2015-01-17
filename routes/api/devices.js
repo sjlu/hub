@@ -137,4 +137,11 @@ router.get('/:device_id/events', getDeviceFromParams, function(req, res, next) {
   })
 });
 
+router.get('/:device_id/claim_code', getDeviceFromParams, function(req, res, next) {
+  models.Device.findOne({_id:req.device._id}).select('claim_code').exec(function(err, device) {
+    if (err) return next(err);
+    res.json(device);
+  });
+});
+
 module.exports = router;
