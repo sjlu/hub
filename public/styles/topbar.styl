@@ -4,11 +4,19 @@
   .navbar
     margin-bottom: 0
 
+    .dropdown-menu > li > a
+      padding: 15px 20px
+
+    .dropdown-menu > li > a > div
+      color: #999
+
     .navbar-nav > li > a
       color: white
+      background-color: transparent
 
       &:hover
         text-decoration: underline
+        background-color: transparent
 
   @media(min-width: 768px)
     .navbar-nav > li > a
@@ -27,4 +35,16 @@
   .navbar-inverse
     background-color: transparent
     border-color: transparent
+
+    .navbar-collapse
+      border-top: 0
+
+  .navbar-toggle,
+  .navbar-inverse
+    background-color: transparent !important
+    border-color: transparent !important
+
+    &:hover
+      background-color: transparent
+      border-color: transparent
 
