@@ -7,6 +7,28 @@ block body
         div.row
           div.col-md-offset-2.col-md-8
             div(topbar)
+              nav.navbar.navbar-inverse
+                div.container-fluid
+                  div.navbar-header
+                    button.navbar-toggle.collapsed(data-toggle="collapse" data-target="#navbar")
+                      span.icon-bar
+                      span.icon-bar
+                      span.icon-bar
+                    if user.is_admin
+                      a.navbar-brand.clearfix(href="/admin")
+                        img.img-responsive.img-rounded(src="/images/logo_yellow.png")
+                    else
+                      a.navbar-brand.clearfix(href="/client")
+                        img.img-responsive.img-rounded(src="/images/logo_yellow.png")
+                  div.collapse.navbar-collapse#navbar
+                    ul.nav.navbar-nav.navbar-right
+                      li
+                        a(href="/client")
+                          | Overview
+                      li
+                        a(href="/logout")
+                          | Logout
+
     div.container
       div.row
         div.col-md-offset-2.col-md-8

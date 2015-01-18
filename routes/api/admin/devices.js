@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var spark = require('../../lib/spark');
-var middlewares = require('../../lib/middlewares');
-var models = require('../../lib/models');
+var spark = require('../../../lib/spark');
+var middlewares = require('../../../lib/middlewares');
+var models = require('../../../lib/models');
 var _ = require('lodash');
 var async = require('async');
-var firmware = require('../../lib/firmware');
+var firmware = require('../../../lib/firmware');
 
 router.use(middlewares.auth.requiresAdmin);
 

@@ -7,7 +7,7 @@ router.use(middlewares.auth.requiresAdmin);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  return res.render('app', {name: 'admin'});
+  return res.render('app', {name: 'admin', user: req.user});
 });
 
 module.exports = router;

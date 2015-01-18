@@ -2,7 +2,7 @@ admin.controller('devices', function($scope, $http, $modal) {
 
   $scope.devices;
   $scope.getDevices = function() {
-    $http.get('/api/devices').success(function(data) {
+    $http.get('/api/admin/devices').success(function(data) {
       $scope.devices = data;
     });
   }
@@ -14,7 +14,7 @@ admin.controller('devices', function($scope, $http, $modal) {
       controller: 'addDeviceModal'
     });
     modal.result.then(function(sparkId) {
-      $http.post('/api/devices', {
+      $http.post('/api/admin/devices', {
         spark_id: sparkId
       }).success(function(data) {
         $scope.getDevices();
@@ -29,7 +29,7 @@ admin.controller('devices', function($scope, $http, $modal) {
       device_id: deviceId
     });
     modal.result.then(function(firmware) {
-      $http.post('/api/devices/'+deviceId+'/firmware', {
+      $http.post('/api/admin/devices/'+deviceId+'/firmware', {
         firmware: firmware
       }).success(function(data) {
         $scope.getDevices();

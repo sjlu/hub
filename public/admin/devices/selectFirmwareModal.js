@@ -3,7 +3,7 @@ admin.controller('selectFirmwareModal', function($scope, $modalInstance, $http) 
   $scope.deviceId;
 
   $scope.firmware;
-  $http.get('/api/firmware').success(function(data) {
+  $http.get('/api/admin/firmware').success(function(data) {
     $scope.firmware = data;
   });
 

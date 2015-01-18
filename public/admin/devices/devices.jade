@@ -1,6 +1,5 @@
+br
 div.devices
-  button.btn.btn-sm.btn-primary(ng-click="claimDevice()")
-    | Add
   table.table.table-bordered
     thead
       th
@@ -38,3 +37,7 @@ div.devices
             | None
         td
           | {{device._uid.name}}
+      tr
+        td(colspan="5" ng-click="claimDevice()").text-center
+          strong
+            | Add a new device

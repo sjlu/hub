@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var firmware = require('../../lib/firmware');
-var middlewares = require('../../lib/middlewares');
+var firmware = require('../../../lib/firmware');
+var middlewares = require('../../../lib/middlewares');
 var async = require('async');
 
 router.use(middlewares.auth.requiresAdmin);
