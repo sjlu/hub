@@ -6,7 +6,12 @@ client.controller('account', function($scope, $http) {
   $scope.save = function() {
     $http.put('/api/users/me', $scope.user).success(function(data) {
       $scope.user = data;
-      $scope.nameChanged = false;
+    });
+  }
+
+  $scope.saveTimezone = function() {
+    $http.put('/api/users/me/timezone', {timezone: $scope.user.timezone}).success(function(data) {
+      $scope.user = data;
     });
   }
 });

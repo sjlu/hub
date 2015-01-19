@@ -17,12 +17,9 @@ div.section-body
           | Knowing your full name makes your friends know who you are.
     div.col-sm-8
       div.col-sm-6
-        input.input-lg.form-control(type="text", ng-model="user.first_name", placeholder="First name", ng-change="nameChanged = true;")
+        input.input-lg.form-control(type="text", ng-model="user.first_name", placeholder="First name", ng-blur="save()")
       div.col-sm-6
-        input.input-lg.form-control(type="text", ng-model="user.last_name", placeholder="Last name", ng-change="nameChanged = true;")
-      div.col-sm-6
-        button.btn.btn-lg.btn-primary(ng-click="save()", ng-show="nameChanged")
-          | Save
+        input.input-lg.form-control(type="text", ng-model="user.last_name", placeholder="Last name" ng-blur="save()")
   hr
   div.section-column.row
     div.col-sm-4
@@ -33,3 +30,79 @@ div.section-body
     div.col-sm-8
       div.col-sm-12
         input.input-lg.form-control(type="email", disabled="true", value="{{user.email}}")
+  hr
+  div.section-column.row
+    div.col-sm-4
+      div.section-column-header
+        | Timezone
+        div.small
+          | What timezone are your you in?
+    div.col-sm-8
+      div.col-sm-12
+        select.form-control.input-lg(name="timezone" ng-model="user.timezone" ng-change="saveTimezone()")
+          option(value="-12")
+            | (GMT -12:00) Eniwetok, Kwajalein
+          option(value="-11")
+            | (GMT -11:00) Midway Island, Samoa
+          option(value="-10")
+            | (GMT -10:00) Hawaii
+          option(value="-9")
+            | (GMT -9:00) Alaska
+          option(value="-8")
+            | (GMT -8:00) Pacific Time (US &amp; Canada)
+          option(value="-7")
+            | (GMT -7:00) Mountain Time (US &amp; Canada)
+          option(value="-6")
+            | (GMT -6:00) Central Time (US &amp; Canada), Mexico City
+          option(value="-5")
+            | (GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima
+          option(value="-4.5")
+            | (GMT -4:30) Caracas
+          option(value="-4")
+            | (GMT -4:00) Atlantic Time (Canada), La Paz, Santiago
+          option(value="-3.5")
+            | (GMT -3:30) Newfoundland
+          option(value="-3")
+            | (GMT -3:00) Brazil, Buenos Aires, Georgetown
+          option(value="-2")
+            | (GMT -2:00) Mid-Atlantic
+          option(value="-1")
+            | (GMT -1:00 hour) Azores, Cape Verde Islands
+          option(value="0")
+            | (GMT) Western Europe Time, London, Lisbon, Casablanca, Greenwich
+          option(value="1")
+            | (GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris
+          option(value="2")
+            | (GMT +2:00) Kaliningrad, South Africa, Cairo
+          option(value="3")
+            | (GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg
+          option(value="3.5")
+            | (GMT +3:30) Tehran
+          option(value="4")
+            | (GMT +4:00) Abu Dhabi, Muscat, Yerevan, Baku, Tbilisi
+          option(value="4.5")
+            | (GMT +4:30) Kabul
+          option(value="5")
+            | (GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent
+          option(value="5.5")
+            | (GMT +5:30) Mumbai, Kolkata, Chennai, New Delhi
+          option(value="5.75")
+            | (GMT +5:45) Kathmandu
+          option(value="6")
+            | (GMT +6:00) Almaty, Dhaka, Colombo
+          option(value="6.5")
+            | (GMT +6:30) Yangon, Cocos Islands
+          option(value="7")
+            | (GMT +7:00) Bangkok, Hanoi, Jakarta
+          option(value="8")
+            | (GMT +8:00) Beijing, Perth, Singapore, Hong Kong
+          option(value="9")
+            | (GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk
+          option(value="9.5")
+            | (GMT +9:30) Adelaide, Darwin
+          option(value="10")
+            | (GMT +10:00) Eastern Australia, Guam, Vladivostok
+          option(value="11")
+            | (GMT +11:00) Magadan, Solomon Islands, New Caledonia
+          option(value="12")
+            | (GMT +12:00) Auckland, Wellington, Fiji, Kamchatka

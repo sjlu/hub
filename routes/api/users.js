@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var models = require('../../lib/models');
 var middlewares = require('../../lib/middlewares');
+var jobs = require('../../lib/jobs');
 
 router.use(middlewares.auth.requiresUser);
 
@@ -14,6 +15,30 @@ router.put('/me', function(req, res, next) {
     if (err) return next(err);
     res.json(user);
   });
+});
+
+router.put('/me/timezone', function(req, res, next) {
+
+  if (!req.body.timezone) {
+    return res.json(400, {"error": "timezone is required"});
+  }
+
+  if (req.body.timezone > 12 || req.body.timezone < -12) {
+    return res.json(400, {"error": "timezone must be from -12 < x < 12"});
+  }
+
+  req.user.timezone = req.body.timezone;
+
+  req.user.save(function(err, user) {
+    if (err) return next(err);
+    jobs.create("update_user_devices_timezone", {
+      user_id: user._id
+    }).save(function(err) {
+      if (err) return next(err);
+      res.json(user);
+    });
+  });
+
 });
 
 module.exports = router;
