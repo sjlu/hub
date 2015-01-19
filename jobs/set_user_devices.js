@@ -4,6 +4,7 @@ var jobs = require('../lib/jobs');
 
 module.exports = function(job, done) {
 
+  var type = job.data.type;
   var userId = job.data.user_id;
 
   async.parallel({
@@ -22,9 +23,9 @@ module.exports = function(job, done) {
 
       jobs.create('run_spark_function', {
         device_id: device._id,
-        function_name: 'set_timezone',
-        variable_name: 'timezone',
-        data: data.user.timezone
+        function_name: 'set_' + type,
+        variable_name: type,
+        data: data.user[type]
       }).save(cb)
 
     }, done);

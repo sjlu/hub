@@ -31,7 +31,25 @@ router.put('/me/timezone', function(req, res, next) {
 
   req.user.save(function(err, user) {
     if (err) return next(err);
-    jobs.create("update_user_devices_timezone", {
+    jobs.create("set_user_devices", {
+      type: 'timezone',
+      user_id: user._id
+    }).save(function(err) {
+      if (err) return next(err);
+      res.json(user);
+    });
+  });
+
+});
+
+router.put('/me/alarm', function(req, res, next) {
+
+  req.user.alarm = req.body.alarm;
+
+  req.user.save(function(err, user) {
+    if (err) return next(err);
+    jobs.create("set_user_devices", {
+      type: 'alarm',
       user_id: user._id
     }).save(function(err) {
       if (err) return next(err);

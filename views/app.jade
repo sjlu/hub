@@ -1,5 +1,8 @@
 extends ./layout
 
+block stylesheets
+  link(rel='stylesheet' type='text/css' href='/bower_components/clockpicker/dist/bootstrap-clockpicker.min.css')
+
 block body
   div(ng-app="#{name}")
     div.topbar.clearfix
@@ -61,6 +64,7 @@ block scripts
   script(src="/bower_components/moment/min/moment.min.js")
   script(src="/bower_components/angular-moment/angular-moment.min.js")
   script(src="/bower_components/lodash/dist/lodash.min.js")
+  script(src="/bower_components/clockpicker/dist/bootstrap-clockpicker.min.js")
   script
     | window.#{name} = angular.module('#{name}', ['ngRoute', 'templates', 'ui.bootstrap', 'angularMoment']);
   script(src="/build/#{name}/templates.js")

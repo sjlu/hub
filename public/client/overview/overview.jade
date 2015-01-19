@@ -1,1 +1,13 @@
 div.overview
+  br
+  div.row
+    div.col-md-6
+      div.panel.panel-default
+        div.panel-heading
+          h3.panel-title
+            | Alarm
+        div.panel-body
+          div.input-group.clockpicker(data-placement="bottom" data-align="bottom" data-autoclose="true")
+            span.input-group-addon
+              span.fa.fa-clock-o
+            input.input-lg(type="text" class="form-control" ng-model="alarm" ng-change="saveAlarm()")
