@@ -7,7 +7,7 @@ var _ = require('lodash');
 var async = require('async');
 var firmware = require('../../lib/firmware');
 
-router.use(middlewares.auth.requiresAdmin);
+router.use(middlewares.auth.requiresUser);
 
 router.get('/', function(req, res, next) {
 

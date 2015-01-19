@@ -4,6 +4,8 @@ client.config(['$routeProvider', '$locationProvider', function($routeProvider, $
 
   var routes = {
     '/': 'overview',
+    '/account': 'account',
+    '/devices': 'devices'
   };
 
   for (var route in routes) {

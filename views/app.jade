@@ -38,6 +38,9 @@ block body
                               | Account
                               div
                                 =user.name
+                          li
+                            a(href="#/devices")
+                              | My Devices
                           if user.is_admin
                             li
                               a(href="/admin")
