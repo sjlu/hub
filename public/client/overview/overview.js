@@ -7,6 +7,7 @@ client.controller('overview', function($scope, $http) {
       $scope.alarm = data.alarm;
     })
   }
+  $scope.getUser();
 
   $scope.saveAlarm = function() {
     var alarm = moment($scope.alarm, 'hh:mmA');
