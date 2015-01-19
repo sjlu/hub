@@ -15,14 +15,25 @@ router.get('/', function(req, res, next) {
     _uid: req.user._id
   }).exec(function(err, devices) {
     if (err) return next(err);
-    res.json(devices);
+    async.map(devices, function(d, cb) {
+      d.isFirmwareCurrent(function(err, current) {
+        if (err) return cb(err);
+        d = d.toJSON();
+        d.firmware_current = current;
+        cb(null, d);
+      });
+    }, function(err, devices) {
+      if (err) return next(err);
+      res.json(devices);
+    });
   })
 
 });
 
 router.post('/', function(req, res, next) {
 
-  var claimCode = req.body.claim_code;
+  var claimCode = req.body.code;
+  claimCode = claimCode.toLowerCase();
 
   models.Device.findOne({
     claim_code: claimCode

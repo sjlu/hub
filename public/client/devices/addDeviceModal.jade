@@ -1,0 +1,15 @@
+div.modal-header
+  h4.modal-title
+    | Add a new device
+div.modal-body
+  form
+    div.form-group
+      label
+        | ID
+        div
+          small
+            | This is a combination of 6 characters and numbers located on your device
+      input.form-control.input-lg(type="text" ng-model="code" placeholder="spark cloud device id" required="true")
+div.modal-footer
+  button.btn.btn-primary(type="submit" ng-click="add()")
+    | Create

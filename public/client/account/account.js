@@ -3,8 +3,10 @@ client.controller('account', function($scope, $http) {
     $scope.user = data;
   });
 
-  $http.put('/api/users/me').success(function(data) {
-    $scope.user = data;
-    $scope.nameChanged = false;
-  });
+  $scope.save = function() {
+    $http.put('/api/users/me', $scope.user).success(function(data) {
+      $scope.user = data;
+      $scope.nameChanged = false;
+    });
+  }
 });

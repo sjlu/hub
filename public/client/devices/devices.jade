@@ -1,1 +1,27 @@
 div.section-body
+  div.section-column.row
+    div.col-sm-4
+      div.section-column-header
+        | Devices
+    div.col-sm-8
+      button.btn.btn-primary(ng-click="newDevice()")
+        | Add a new device
+      br
+      br
+      table.table
+        tr(ng-repeat="d in devices")
+          td
+            h4
+              | {{d.firmware_name}}
+          td
+            h4
+              label.label.label-success(ng-show="d.connected")
+                | online
+              label.label.label-danger(ng-hide="d.connected")
+                | disconnected
+              | &nbsp;
+              label.label.label-success(ng-show="d.firmware_current")
+                | up to date
+              label.label.label-warning(ng-hide="d.firmware_current")
+                | requires update
+          td

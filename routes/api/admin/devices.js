@@ -6,6 +6,7 @@ var models = require('../../../lib/models');
 var _ = require('lodash');
 var async = require('async');
 var firmware = require('../../../lib/firmware');
+var jobs = require('../../../lib/jobs');
 
 router.get('/', function(req, res, next) {
   async.parallel({
@@ -108,7 +109,7 @@ router.post('/:device_id/firmware', getDeviceFromParams, function(req, res, next
         req.device.save(cb);
       },
       update_job: function(cb) {
-        job.create('update_device_firmware', {
+        jobs.create('update_device_firmware', {
           device_id: req.device._id
         }).save(cb);
       }
