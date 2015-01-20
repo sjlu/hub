@@ -23,20 +23,7 @@ module.exports = function(job, done) {
 
     device.runSparkFunction(funcName, params, function(err) {
       if (err) return done(err);
-
-      if (varName) {
-        device.getSparkVariable(varName, function(err, data) {
-          if (err) return done(err);
-          if (data.value != params) {
-            winston.error('device function update and variable match failed', job.data);
-            return done(new Error("device variable does not match what we updated"));
-          } else {
-            done();
-          }
-        })
-      } else {
-        done();
-      }
+      done();
     });
   });
 
