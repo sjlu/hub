@@ -14,10 +14,10 @@ module.exports = function(job, done) {
     findBy._uid = job.data.user_id
   }
 
-  models.Device.find(findBy).populate('_uid').exec(function(err, data) {
+  models.Device.find(findBy).populate('_uid').exec(function(err, devices) {
     if (err) return done(err);
 
-    async.each(data.devices, function(device, cb) {
+    async.each(devices, function(device, cb) {
       device.getSparkDevice(function(err, sparkDevice) {
         if (err) return cb(err);
         async.each(_.keys(sparkDevice.variables), function(variable, cb) {
