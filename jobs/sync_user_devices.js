@@ -22,12 +22,6 @@ module.exports = function(job, done) {
     if (err) return done(err);
 
     async.each(data.devices, function(device, cb) {
-      if (!device.firmware_name || !data.firmware[device.firmware_name]) {
-        return cb();
-      }
-
-      var firmware = data.firmware[device.firmware_name];
-
       device.getSparkDevice(function(err, sparkDevice) {
         if (err) return cb(err);
         async.each(_.keys(sparkDevice.variables), function(variable, cb) {
