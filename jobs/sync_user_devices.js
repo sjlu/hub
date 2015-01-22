@@ -26,7 +26,6 @@ module.exports = function(job, done) {
         if (err) return cb(err);
         async.each(_.keys(sparkDevice.variables), function(variable, cb) {
           if (sparkDevice.functions.indexOf("set_" + variable) < 0) {
-            console.log(sparkDevice);
             return cb();
           }
 
