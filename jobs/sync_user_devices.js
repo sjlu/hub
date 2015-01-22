@@ -42,7 +42,7 @@ module.exports = function(job, done) {
             if (err) return cb(err);
             sparkDevice.getVariable(variable, function(err, returnedSparkVariableData) {
               if (err) return cb(err);
-              if (returnedSparkVariableData != variableData) {
+              if (returnedSparkVariableData.result != variableData) {
                 return cb(new Error("variable was set but did not return the same value"));
               }
               winston.info('variable set on device', {
