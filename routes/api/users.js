@@ -31,8 +31,7 @@ router.put('/me/timezone', function(req, res, next) {
 
   req.user.save(function(err, user) {
     if (err) return next(err);
-    jobs.create("set_user_devices", {
-      type: 'timezone',
+    jobs.create("sync_user_devices", {
       user_id: user._id
     }).save(function(err) {
       if (err) return next(err);
@@ -48,8 +47,7 @@ router.put('/me/alarm', function(req, res, next) {
 
   req.user.save(function(err, user) {
     if (err) return next(err);
-    jobs.create("set_user_devices", {
-      type: 'alarm',
+    jobs.create("sync_user_devices", {
       user_id: user._id
     }).save(function(err) {
       if (err) return next(err);
