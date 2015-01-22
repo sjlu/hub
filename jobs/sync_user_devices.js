@@ -48,8 +48,8 @@ module.exports = function(job, done) {
               winston.info('variable set on device', {
                 variable: variable,
                 data: variableData,
-                user: data.user._id,
-                device: device._id
+                user: data.user._id.toString(),
+                device: device._id.toString()
               });
               cb();
             });
