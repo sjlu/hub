@@ -7,18 +7,14 @@ var _ = require('lodash');
 
 module.exports = function(job, done) {
 
-  var userId = job.data.user_id;
+  var findBy = {};
+  if (job.data.device_id) {
+    findBy._id = job.data.device_id
+  } else if (job.data.user_id) {
+    findBy._uid = job.data.user_id
+  }
 
-  async.parallel({
-    user: function(cb) {
-      models.User.findById(userId).exec(cb);
-    },
-    devices: function(cb) {
-      models.Device.find({
-        _uid: userId
-      }).exec(cb);
-    }
-  }, function(err, data) {
+  models.Device.find(findBy).populate('_uid').exec(function(err, data) {
     if (err) return done(err);
 
     async.each(data.devices, function(device, cb) {
@@ -32,8 +28,8 @@ module.exports = function(job, done) {
           var variableData;
           if (device[variable]) {
             variableData = device[variable];
-          } else if (data.user[variable]) {
-            variableData = data.user[variable];
+          } else if (device._uid[variable]) {
+            variableData = device._uid[variable];
           } else {
             return cb();
           }
@@ -48,7 +44,7 @@ module.exports = function(job, done) {
               winston.info('variable set on device', {
                 variable: variable,
                 data: variableData,
-                user: data.user._id.toString(),
+                user: device._uid._id.toString(),
                 device: device._id.toString()
               });
               cb();
